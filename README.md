@@ -16,7 +16,7 @@ Check the [example](./example) folder. You will need a HTTP server to serve the 
 
 ## License
 
-The svg masks in [./unique_units_masks](./unique_units_masks) are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (or see [local copy](./License.md)). If you want to obtain a *commercial license* you can contact the author using the [issues](https://github.com/simonsan/unique-unit-masks/issues).
+The svg masks in [./unique_units_masks](./unique_units_masks) are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (or see [local copy](./License.md)). If you want to obtain a *commercial license* you can contact the author using the [issues](https://github.com/transparencies/unique-unit-masks/issues).
 
 ## Disclaimer
 
