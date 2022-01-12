@@ -1,0 +1,56 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  /* Change Image direction to make it face left/right */
+  /* -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);*/
+}
+
+.uu, .mask {
+  /* Display images on top of each other */
+  flex: 1;
+}
+
+.uu {
+  width: 256px;
+  height: 256px;
+  background: url("Berbers.png") no-repeat;
+  background-size: 100% auto;
+    display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.mask {
+  /* The SVG gets this class on injection */
+  width: 256px;
+  height: 256px;
+  /* For the future you might be able to use mask property,
+  which is currently not supported by many browsers
+  https://caniuse.com/?search=mask
+  
+  -webkit-mask: url(../unique_units_masks/Berbers_mask.svg) no-repeat;
+  mask: url(../unique_units_masks/Berbers_mask.svg) no-repeat; */
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.uu svg {
+  mix-blend-mode: multiply;
+}
+
+.uu svg g path {
+  /* You can set the colour of the mask with this */
+  fill: rgba(181, 114, 129, 1) !important;
+}
