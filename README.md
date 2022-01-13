@@ -22,5 +22,5 @@ The svg masks in [./unique_units_masks](./unique_units_masks) are licensed under
 
 Age of Empires II © Microsoft Corporation.
 
-These assets were created under Microsoft's "Game Content Usage Rules" using assets
+These assets were created under Microsoft's ["Game Content Usage Rules"](https://www.xbox.com/en-us/developers/rules) using assets
 from Age of Empires II, we are not endorsed by or affiliated with Microsoft.
