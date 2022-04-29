@@ -3,36 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="mask.css" />
-    <script src="svg-inject.min.js"></script>
-	
-    <script>
-    	SVGInject.setOptions({
-      		useCache: false, // no caching
-      		copyAttributes: false, // do not copy attributes from `<img>` to `<svg>`
-      		makeIdsUnique: false, // do not make ids used within the SVG unique
-      		afterLoad: function(svg, svgString) {
-        	// add a class to the svg
-        	svg.classList.add('mask');
-      		},
-      		beforeInject: function(img, svg) {
-		// wrap SVG in a div element
-        	var div = document.createElement('div');
-        	div.appendChild(svg);
-        	return div;
-      		},
-      		afterInject: function(img, svg) {
-        	// set opacity
-        	svg.style.opacity = 1;
-      		},
-    	});
-  </script>
   </head>
 
   <body>
-  <div class="container">
-	<div class="uu">
-		<img src="Berbers_mask.svg" onload="SVGInject(this)" alt="Image mask for Berbers unique unit">
-    </div>
+  <div class="uu">
+	<div class="mask"></div>
   </div>
   </body>
 </html>

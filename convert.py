@@ -1,6 +1,8 @@
-from PIL import Image
+from PIL import Image, ImageOps
 import os
 import glob
+import cv2
+import numpy as np
 
 PLAYER_COLOUR = (0, 0, 255)
 AOE_FOLDER = r"D:\Games\SteamLibrary\steamapps\common\AoE2DE\widgetui\textures\ingame\units"
@@ -64,9 +66,9 @@ def is_empty(v):
     return v[0] == 0 and v[1] == 0 and v[2] == 0
 
 
-def get_file_path(p, folder=None,):
+def get_file_path(p, folder=None):
     texture_id = int(os.path.basename(p)[0:3])
-    civ = CIVS.get(texture_id, texture_id).lower()
+    civ = CIVS.get(texture_id, texture_id)
     return os.path.join(folder, os.path.basename(f"{civ}.png"))
 
 
@@ -79,22 +81,40 @@ def main():
             with Image.open(p) as im:
                 r, g, b, a = im.split()
 
-                a.save(get_file_path(p, "generated_masks"))
-
                 rgb = Image.merge("RGB", (r, g, b))
-                rgb.putalpha(255)
 
+                img = np.array(rgb)
+
+                thresh1 = cv2.inRange(img, (14, 0, 0), (255, 255, 255))
+                thresh2 = cv2.inRange(img, (0, 1, 0), (255, 255, 255))
+                thresh3 = cv2.inRange(img, (0, 0, 1), (255, 255, 255))
+                thresh = cv2.bitwise_and(thresh1, thresh2, thresh3)
+
+                # apply morphology
+                kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+                thresh = cv2.morphologyEx(thresh, cv2.MORPH_DILATE, kernel)
+
+                kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (8, 8))
+                thresh = cv2.morphologyEx(thresh, cv2.MORPH_ERODE, kernel)
+
+                kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (12, 12))
+                thresh = cv2.morphologyEx(thresh, cv2.MORPH_DILATE, kernel)
+
+                alpha = Image.fromarray(thresh)
+                alpha.save(get_file_path(p, "generated_alpha"))
+
+                rgb.putalpha(255)
                 overlay = Image.new("RGBA", im.size, (255, 255, 255, 0))
-                alpha = Image.new("L", im.size, 255)
+
+                color_mask = Image.new("L", im.size, 0)
+                color_mask.putalpha(ImageOps.invert(a))
+                color_mask.save(get_file_path(p, "generated_masks"))
 
                 w, h = im.size
                 for x in range(w):
                     for y in range(h):
                         pixel = rgb.getpixel((x, y))
                         overlay.putpixel((x, y), scale(pixel))
-
-                        if is_empty(pixel):
-                            alpha.putpixel((x, y), 0)
 
                 rgb.putalpha(alpha)
                 rgb.save(get_file_path(p, "generated_base"))
