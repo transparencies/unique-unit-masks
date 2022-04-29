@@ -12,16 +12,50 @@ body {
 
   background: url("../generated_base/britons.png");
   background-size: 100% auto;
+
+  display: inline-block;
 }
 
 .mask {
   height: 256px;
   width: 256px;
 
-  background: blue;
   background-size: 100% auto;
 
   -webkit-mask-image: url("../generated_masks/britons.png");
 
   mix-blend-mode: multiply;
 }
+
+.blue {
+    background: blue;
+}
+
+.red {
+    background: red;
+}
+
+.green {
+    background: green;
+}
+
+.yellow {
+    background: yellow;
+}
+
+.teal {
+    background: lightskyblue;
+}
+
+.purple {
+    background: purple;
+}
+
+.orange {
+    background: orange;
+}
+
+.grey {
+    background: grey;
+}
+
